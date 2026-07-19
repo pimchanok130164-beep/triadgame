@@ -18,11 +18,15 @@
             overflow: hidden; touch-action: none;
         }
 
-        /* 📱 กรอบร้านคาเฟ่ สีเอิร์ทโทน (เบจ-ครีม) */
+        /* 📱 กรอบร้านคาเฟ่ สีครีมลายโพลกาดอทน้ำตาล */
         #app-container {
             width: 100%; max-width: 420px; 
             height: 100%; height: 100dvh; 
-            background: linear-gradient(to bottom, #f4e1d2 0%, #d7ccc8 100%);
+            background-color: #fffcf4;
+            background-image: radial-gradient(#8d6e63 15%, transparent 16%), 
+                              radial-gradient(#8d6e63 15%, transparent 16%);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
             border-left: 10px solid #5d4037; border-right: 10px solid #5d4037;
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
             position: relative; 
@@ -32,7 +36,7 @@
 
         #warmOverlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, transparent 80%);
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 80%);
             pointer-events: none; z-index: 1; animation: pulseGlow 4s infinite alternate ease-in-out;
         }
         @keyframes pulseGlow { 0% { opacity: 0.5; } 100% { opacity: 1; } }
@@ -55,14 +59,14 @@
 
         /* กล่องคู่มือการเล่น สไตล์เมนูคาเฟ่ */
         .instruction-box {
-            background: #fffcf4; border: 3px solid #a1887f; padding: 15px; 
+            background: rgba(255, 252, 244, 0.95); border: 3px solid #a1887f; padding: 15px; 
             border-radius: 12px; width: 100%; text-align: left; margin-bottom: 15px;
             box-shadow: 0 6px 12px rgba(0,0,0,0.1); position: relative;
         }
         .instruction-box h3 { color: #5d4037; margin-bottom: 8px; font-size: 1.1rem; text-align: center;}
         .instruction-box p { font-size: 0.9rem; color: #4e342e; font-weight: 700; margin-bottom: 6px; line-height: 1.4;}
 
-        .difficulty-zone { width: 100%; background: rgba(255, 255, 255, 0.5); padding: 12px; border-radius: 12px; border: 2px dashed #8d6e63; margin-bottom: 20px;}
+        .difficulty-zone { width: 100%; background: rgba(255, 255, 255, 0.85); padding: 12px; border-radius: 12px; border: 2px dashed #8d6e63; margin-bottom: 20px;}
         .diff-title { font-size: 1rem; color: #4e342e; margin-bottom: 8px; font-weight: 900; text-align: center;}
         .diff-buttons { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
         
@@ -70,10 +74,11 @@
             padding: 8px 12px; font-size: 0.9rem; font-weight: 900; color: #5d4037;
             background: #fdfbf7; border: 3px solid #8d6e63; border-bottom: 5px solid #6d4c41; border-radius: 12px; cursor: pointer; transition: all 0.1s ease; -webkit-tap-highlight-color: transparent;
         }
+        .diff-hard { color: #d32f2f; } /* ปรับคำว่าเร่งด่วนให้เป็นสีแดงหน่อยๆ */
         .btn-diff:active { transform: translateY(3px); border-bottom-width: 2px; }
         .btn-diff.active.diff-easy { background: #fff3e0; color: #e65100; border-color: #ffb300; border-bottom-color: #ff8f00; } /* วาฟเฟิล */
         .btn-diff.active.diff-medium { background: #eefeeb; color: #2e7d32; border-color: #81c784; border-bottom-color: #388e3c; } /* มัทฉะ */
-        .btn-diff.active.diff-hard { background: #efebe9; color: #3e2723; border-color: #8d6e63; border-bottom-color: #4e342e; } /* ดาร์กช็อก */
+        .btn-diff.active.diff-hard { background: #ffebee; color: #c62828; border-color: #d32f2f; border-bottom-color: #b71c1c; } /* ช็อกโกแลตราสเบอร์รี่ (แดง) */
 
         /* กลุ่มปุ่มแนวตั้ง */
         .btn-group-vertical { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 300px; margin: 0 auto; }
@@ -206,6 +211,7 @@
                     <div class="diff-buttons">
                         <button type="button" class="btn-diff diff-easy" onclick="setDifficulty('Easy')">ชิลๆ 🧇</button>
                         <button type="button" class="btn-diff diff-medium active" onclick="setDifficulty('Medium')">ปานกลาง 🥐</button>
+                        <!-- เพิ่ม class สีแดงให้ปุ่มเร่งด่วน -->
                         <button type="button" class="btn-diff diff-hard" onclick="setDifficulty('Hard')">เร่งด่วน 🍫</button>
                     </div>
                 </div>
