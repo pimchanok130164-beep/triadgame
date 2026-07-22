@@ -47,34 +47,33 @@
         }
 
         /* ---------------- 🏠 หน้า Lobby ---------------- */
-        .lobby-header { width: 100%; flex-shrink: 0; text-align: center; }
+        .lobby-header { width: 100%; flex-shrink: 0; text-align: center; margin-top: 10px; }
 
-        /* ป้ายโลโก้สไตล์ป้ายไม้ก๊อกโค้งๆ */
+        /* ป้ายโลโก้สไตล์ป้ายไม้ก๊อกโค้งๆ (ปรับให้ตั้งตรงแล้ว) */
         .game-logo {
             background: #fff; border-radius: 30px;
-            padding: 12px 30px; font-size: 2.2rem; color: #8d6e63; margin-bottom: 20px;
+            padding: 12px 35px; font-size: 2.2rem; color: #8d6e63; margin-bottom: 25px;
             font-weight: 900; text-align: center; 
-            box-shadow: 0 8px 0 #e6d8ce, 0 15px 20px rgba(93, 64, 55, 0.1);
-            display: inline-block;
+            box-shadow: 0 8px 0 #e6d8ce, 0 15px 20px rgba(93, 64, 55, 0.15);
+            display: inline-block; 
         }
 
-        /* กล่องคู่มือการเล่น นุ่มฟู */
-        .instruction-box {
-            background: #fff; padding: 20px 15px; 
-            border-radius: 24px; width: 100%; text-align: left; margin-bottom: 20px;
-            box-shadow: 0 8px 0 #e6d8ce, 0 15px 20px rgba(93, 64, 55, 0.08); position: relative;
+        /* กล่องคำแนะนำก่อนเริ่มเกม (Start Instruction Box) */
+        .start-instruction-box {
+            background: #fff; padding: 22px 18px; 
+            border-radius: 25px; width: 100%; text-align: center; margin-bottom: 25px;
+            box-shadow: 0 8px 0 #e6d8ce, 0 15px 20px rgba(93, 64, 55, 0.08);
+            border: 3px dashed #d7ccc8;
         }
-        .instruction-box h3 { color: #d4a373; margin-bottom: 10px; font-size: 1.2rem; text-align: center;}
-        .instruction-box p { font-size: 0.95rem; color: #795548; font-weight: 700; margin-bottom: 8px; line-height: 1.5;}
 
         /* โซนเลือกระดับความยาก */
-        .difficulty-zone { width: 100%; background: transparent; margin-bottom: 25px;}
-        .diff-title { font-size: 1.05rem; color: #8d6e63; margin-bottom: 10px; font-weight: 900; text-align: center;}
+        .difficulty-zone { width: 100%; background: transparent; margin-bottom: 30px;}
+        .diff-title { font-size: 1.15rem; color: #8d6e63; margin-bottom: 15px; font-weight: 900; text-align: center;}
         .diff-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
         
         /* ปุ่มระดับความยาก สไตล์เยลลี่ */
         .btn-diff {
-            padding: 10px 16px; font-size: 0.95rem; font-weight: 900; color: #8d6e63;
+            padding: 12px 18px; font-size: 1rem; font-weight: 900; color: #8d6e63;
             background: #fff; border: none; border-radius: 20px; cursor: pointer; transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1); -webkit-tap-highlight-color: transparent;
             box-shadow: 0 6px 0 #e6d8ce, 0 10px 10px rgba(93, 64, 55, 0.1);
         }
@@ -121,6 +120,70 @@
         .chord-title { font-weight: 900; color: #8d6e63; font-size: 1.1rem;}
         .chord-formula { color: #d4a373; font-weight: bold; }
         .chord-desc { color: #795548; display: block; margin-top: 6px; font-size: 0.85rem; line-height: 1.5;}
+
+        /* ---------------- 📖 หน้าต่างคู่มือการเล่น (How to Play Modal) ---------------- */
+        .how-to-overlay {
+            background: rgba(46, 30, 24, 0.88); 
+            z-index: 200;
+        }
+
+        .guide-modal {
+            position: relative; width: 100%; max-width: 360px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+
+        .guide-header {
+            width: 100%; display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 15px;
+        }
+        .guide-title {
+            font-size: 2.2rem; color: #78c850; font-weight: 900;
+            text-shadow: 0 3px 0 #1b2e22, 0 0 12px rgba(120, 200, 80, 0.4);
+        }
+
+        /* ปุ่มกากบาท X สีแดง */
+        .btn-close-x {
+            width: 50px; height: 50px; background: #ff5252;
+            border: 4px solid #fff; border-radius: 50%;
+            color: #fff; font-size: 1.8rem; font-weight: 900;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .btn-close-x:active { transform: scale(0.9); }
+
+        /* แผ่นแผนภาพวาดคำอธิบายวิธีเล่น */
+        .guide-diagram-canvas {
+            width: 100%; height: 480px; position: relative;
+            background: rgba(0,0,0,0.15); border-radius: 25px;
+            border: 2px dashed rgba(255,255,255,0.2); margin-bottom: 15px;
+        }
+
+        /* จานตัวอย่างในคู่มือ */
+        .demo-plate {
+            position: absolute; background: #fff;
+            color: #795548; font-size: 1.1rem; font-weight: 900; display: flex; align-items: center; justify-content: center;
+            border-radius: 30px; box-shadow: 0 6px 0 #e6d8ce; padding: 10px 18px; white-space: nowrap;
+        }
+
+        .demo-answer-zone {
+            position: absolute; bottom: 80px; width: 90%; left: 5%;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+        }
+        .demo-btn {
+            padding: 14px 5px; font-size: 1rem; font-weight: 900; color: #fff; border: none; border-radius: 16px;
+            text-align: center; line-height: 1;
+        }
+
+        /* SVG เส้นลูกศรชี้ */
+        .arrow-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+
+        /* กล่องข้อความลายมือชอล์ก */
+        .chalk-text-box {
+            position: absolute; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            font-weight: 700; line-height: 1.35; text-align: center; width: 100%;
+        }
 
         /* ---------------- 🥐 หน้าจอเล่นเกมหลัก ---------------- */
         #gameWrapper { justify-content: space-between; padding: 20px 15px 0 15px; display: none; flex-direction: column;}
@@ -199,20 +262,70 @@
     <div id="app-container">
         <div id="warmOverlay"></div>
 
-        <!-- 🏠 หน้า Lobby -->
-        <div id="setupScreen" class="screen">
+        <!-- 📖 หน้าต่างคู่มือการเล่น (How to Play) - แสดงเป็นหน้าแรกสุด -->
+        <div id="howToPlayScreen" class="overlay-screen how-to-overlay" style="display: flex;">
+            <div class="guide-modal">
+                <div class="guide-header">
+                    <span class="guide-title">คู่มือการเล่น</span>
+                    <!-- กากบาทกดแล้วไปหน้า Lobby -->
+                    <button class="btn-close-x" onclick="closeHowToPlay()">✕</button>
+                </div>
+
+                <!-- แผ่นวาดภาพจำลองวิธีเล่น ปรับระยะห่างให้โล่งขึ้น -->
+                <div class="guide-diagram-canvas">
+                    <!-- จานร่วงลงมา 3 จาน -->
+                    <div class="demo-plate" style="top: 20px; left: 30px;">D - F - A</div>
+                    <div class="demo-plate" style="top: 75px; left: 60px;">A - C - E</div>
+                    <div class="demo-plate" style="top: 130px; left: 30px;">A - C# - E</div>
+
+                    <div class="chalk-text-box" style="top: 200px; font-size: 1.15rem; transform: rotate(-2deg); padding-right: 80px;">
+                        วิเคราะห์ว่าเป็น<br>คอร์ดชนิดใด
+                    </div>
+
+                    <!-- SVG เส้นลูกศรชี้สีเขียว -->
+                    <svg class="arrow-svg" viewBox="0 0 360 480">
+                        <defs>
+                            <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                <path d="M 0 0 L 10 5 L 0 10 z" fill="#8bc34a" />
+                            </marker>
+                        </defs>
+                        <!-- ปรับพิกัดลูกศรไม่ให้ทับข้อความ -->
+                        <path d="M 170, 110 Q 320, 110 270, 270" fill="none" stroke="#8bc34a" stroke-width="4" stroke-dasharray="6,4" marker-end="url(#arrow)" />
+                    </svg>
+
+                    <!-- แผงปุ่ม 4 ปุ่มด้านล่าง -->
+                    <div class="demo-answer-zone">
+                        <div class="demo-btn btn-major" style="box-shadow: 0 6px 0 #f57f17;">Major 🧇</div>
+                        <div class="demo-btn btn-minor" style="box-shadow: 0 6px 0 #5d4037;">Minor 🍫</div>
+                        <div class="demo-btn btn-aug" style="box-shadow: 0 6px 0 #e65100;">Augmented 🥐</div>
+                        <div class="demo-btn btn-dim" style="box-shadow: 0 6px 0 #607d8b;">Diminished 🧀</div>
+                    </div>
+
+                    <div class="chalk-text-box" style="bottom: 15px; font-size: 1.15rem;">
+                        และกดชนิดให้ถูกต้อง<br>เพื่อไปเลเวลถัดไป
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🏠 หน้า Lobby (เริ่มเกม & ทบทวน) -->
+        <div id="setupScreen" class="screen" style="display: none;">
             <div class="lobby-header">
-                <!-- ป้ายนิ่งๆ น่ารัก (ไม่เอียงแล้ว) -->
+                <!-- ป้ายโลโก้เกม -->
                 <div class="game-logo">Café Triad ☕</div>
                 
-                <div class="instruction-box">
-                    <h3>🍽️ วิธีการสั่งขนม</h3>
-                    <p>1. ดูจานขนมที่ร่วงหล่นลงมา (โน้ต 3 ตัว)</p>
-                    <p>2. วิเคราะห์ว่าเป็นคอร์ด Triad ชนิดใด</p>
-                    <p>3. กดปุ่มชนิดคอร์ดให้ถูกต้องก่อนจานตกพื้น!</p>
-                    <p style="color:#e57373; text-align:center; margin-top:10px;">❤️ พลาดทำขนมตกได้แค่ 3 ครั้งนะ!</p>
+                <!-- กล่องคำแนะนำก่อนเริ่มเกม -->
+                <div class="start-instruction-box">
+                    <p style="font-size: 1.25rem; color: #8d6e63; font-weight: 900; line-height: 1.5; margin-bottom:10px;">
+                        🥪 พร้อมเสิร์ฟออเดอร์หรือยัง?
+                    </p>
+                    <p style="font-size: 0.95rem; color: #795548; font-weight: 700;">จำให้แม่น! โครงสร้างของคอร์ดแต่ละชนิด</p>
+                    <p style="font-size: 0.85rem; color: #e57373; font-weight: 700; margin-top: 10px;">
+                        ถ้ายังไม่แม่น แวะอ่านเมนูทบทวนก่อนได้นะ
+                    </p>
                 </div>
-                
+
+                <!-- โซนเลือกระดับความยาก -->
                 <div class="difficulty-zone">
                     <p class="diff-title">ระดับความรวดเร็ว ⏱️</p>
                     <div class="diff-buttons">
@@ -222,6 +335,7 @@
                     </div>
                 </div>
 
+                <!-- ปุ่มเริ่มเกมและทบทวน -->
                 <div class="btn-group-vertical">
                     <button class="btn-action" onclick="startGameFromScreen()">เริ่มรับออเดอร์ 🛎️</button>
                     <button class="btn-action btn-secondary" onclick="openReview()">ทบทวนเมนูขนม 📖</button>
@@ -333,12 +447,19 @@
         let gameLoopId, spawnId; 
         let chordsCleared = 0; 
         let selectedDifficulty = 'Medium';
-        let isPaused = false; // ตัวแปรสถานะหยุดเกม
+        let isPaused = false; 
 
         const gameArea = document.getElementById('gameArea');
         const scoreDisplay = document.getElementById('score');
         const missesDisplay = document.getElementById('misses');
         const feedbackText = document.getElementById('feedbackText');
+
+        // ---------------- 📖 ฟังก์ชันปิดหน้าต่างคู่มือ ----------------
+        function closeHowToPlay() {
+            playSound(popSound);
+            document.getElementById('howToPlayScreen').style.display = 'none';
+            document.getElementById('setupScreen').style.display = 'flex';
+        }
 
         // 📖 ฟังก์ชัน Review Menu
         function openReview() {
